@@ -1,5 +1,30 @@
 {% extends 'base.html'%}
 {% block content%}
-<a href=""><button>company</button></a>
-<a href=""><button>job</button></a>
+<a href="{% url 'home_company'%}"class="btn btn-primary m-3">COMPANY</a>
+<a href="{% url 'add_job' %}"class="btn btn-primary">JOB</a>
+
+
+
+
+<div class="container">
+  <div class="row">
+    {% for i in jobs %}
+    <div class="col-md-4 mb-3">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ i.title }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Salary: {{ i.salary }}</h6>
+          <p class="card-text">Job Type: {{ i.job }}</p>
+          <p class="card-text">Posted Date: {{ i.posted_date }}</p>
+
+          <a href="{% url 'edit_job' i.id %}" class="card-link">EDIT</a>
+          <a href="{% url 'delete' i.id %}" class="card-link text-danger">DELETE</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
 {% endblock %}
